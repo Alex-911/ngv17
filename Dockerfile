@@ -20,7 +20,7 @@ RUN pnpm i
 
 RUN ng build --configuration production
 
-ENV PORT=80
-EXPOSE 80
+ENV PORT=8080
+EXPOSE 8080
 
 CMD [ "pnpm", "run", "start:ssr" ]
