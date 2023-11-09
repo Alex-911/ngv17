@@ -18,7 +18,7 @@ COPY . .
 RUN pnpm i -g @angular/cli
 RUN pnpm i 
 
-RUN ng build --configuration prod
+RUN ng build --configuration production
 
 ENV PORT=80
 EXPOSE 80
