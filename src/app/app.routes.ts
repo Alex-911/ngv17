@@ -7,13 +7,16 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => HomeComponent,
+    title: 'New Angular',
   },
   {
     path: 'about',
     loadComponent: () => AboutComponent,
+    title: 'About',
   },
   {
     path: 'contact',
     loadComponent: () => ContactComponent,
+    title: 'Contacts',
   },
 ];
