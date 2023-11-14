@@ -33,8 +33,7 @@
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
-            },
-            "allowedCommonJsDependencies": ["pusher-js"]
+            }
           },
           "configurations": {
             "production": {
