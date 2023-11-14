@@ -44,6 +44,9 @@ dependencies:
   marked:
     specifier: ^9.1.5
     version: 9.1.5
+  pusher-js:
+    specifier: ^8.3.0
+    version: 8.3.0
   rxjs:
     specifier: ~7.8.0
     version: 7.8.1
@@ -6279,6 +6282,12 @@ packages:
       postcss-selector-parser: 6.0.13
     dev: true
 
+  /pusher-js@8.3.0:
+    resolution: {integrity: sha512-6GohP06WlVeomAQQe9qWh1IDzd3+InluWt+ZUOcecVK1SEQkg6a8uYVsvxSJm7cbccfmHhE0jDkmhKIhue8vmA==}
+    dependencies:
+      tweetnacl: 1.0.3
+    dev: false
+
   /qjobs@1.2.0:
     resolution: {integrity: sha512-8YOJEHtxpySA3fFDyCRxA+UUV+fA+rTWnuWvylOK/NCjhY+b4ocCtmu8TtsWb+mYeU+GCHf/S66KZF/AsteKHg==}
     engines: {node: '>=0.9'}
@@ -7330,6 +7339,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /tweetnacl@1.0.3:
+    resolution: {integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==}
+    dev: false
 
   /type-fest@0.21.3:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}

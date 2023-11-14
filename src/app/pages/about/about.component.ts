@@ -1,47 +1,44 @@
-import { DataTableComponent } from '@/app/components/data-table/data-table.component';
+import { PusherService } from '@/app/shared/services/pusher.service';
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+  signal
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ColumnDef } from '@tanstack/table-core';
-import { ContactService, User } from '../contact/contact.service';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule, RouterLink, DataTableComponent],
+  imports: [CommonModule, RouterLink],
   template: `
     <a routerLink="/">Home</a>
     <a routerLink="/about">About Us</a>
     <a routerLink="/contact">Contact</a>
     <div class="prose mx-auto min-w-fit">
-      @if (users() !== undefined) {
-      <app-data-table
-        [data]="users()!"
-        [columnDefs]="columnDefs()"
-        caption="All Users"
-      />
+      <h1>Websocket Messages</h1>
+      @for (m of msg(); track $index) {
+      <pre>{{ m | json }}</pre>
       }
     </div>
   `,
   styles: ``,
 })
-export class AboutComponent {
-  userService = inject(ContactService);
+export class AboutComponent implements OnInit, OnDestroy {
+  pusher = inject(PusherService);
+  channel = this.pusher.channel;
+  msg = signal<Record<string, unknown>[]>([]);
 
-  users = this.userService.users;
+  ngOnInit(): void {
+    this.pusher.channel().bind('new-message', this.newMessage);
+  }
+  ngOnDestroy(): void {
+    this.channel().unbind('new-message', this.newMessage);
+  }
 
-  columnDefs = signal<ColumnDef<User>[]>([
-    {
-      accessorKey: 'id',
-      header: 'ID',
-    },
-    {
-      accessorKey: 'name',
-      header: 'Name',
-    },
-    {
-      accessorKey: 'email',
-      header: 'Email',
-    },
-  ]);
+  newMessage = (data: Record<string, unknown>) => {
+    this.msg.update((d) => [...d, data]);
+  };
 }
