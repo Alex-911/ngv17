@@ -23,4 +23,4 @@ RUN ng build --configuration production
 ENV PORT=8080
 EXPOSE 8080
 
-CMD [ "pnpm", "run", "start:ssr" ]
+CMD [ "npm", "run", "start:ssr" ]
