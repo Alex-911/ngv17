@@ -1,22 +1,22 @@
 FROM node:20-alpine3.18
 
-# Update
-RUN apk add --no-cache libc6-compat
-RUN apk update
+# # Update
+# RUN apk add --no-cache libc6-compat
+# RUN apk update
 
-# install pnpm
-RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" && chmod +x /bin/pnpm
+# # install pnpm
+# RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" && chmod +x /bin/pnpm
 
-# Configure pnpm global
-ENV PNPM_HOME=/pnpm-test/.pnpm
-ENV PATH=$PATH:$PNPM_HOME
+# # Configure pnpm global
+# ENV PNPM_HOME=/pnpm-test/.pnpm
+# ENV PATH=$PATH:$PNPM_HOME
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN pnpm i -g @angular/cli
-RUN pnpm i 
+RUN npm i -g @angular/cli
+RUN npm i 
 
 RUN ng build --configuration production
 

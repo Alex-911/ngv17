@@ -67,22 +67,20 @@ export class DataTableComponent {
   );
 
   goToFirstPage() {
-    
     this.table().setPageIndex(0);
   }
+
   goPrevPage() {
-    
     this.table().previousPage();
   }
 
   canPreviousPage = computed(() => this.table().getCanPreviousPage());
 
   goToLastPage() {
-    
     this.table().setPageIndex(this.table().getPageCount() - 1);
   }
+
   goNextPage() {
-    
     this.table().nextPage();
   }
   canNextPage = computed(() => this.table().getCanNextPage());

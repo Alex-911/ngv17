@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  OnDestroy,
-  OnInit,
-  signal
-} from '@angular/core';
+import { Injectable, OnDestroy, OnInit, signal } from '@angular/core';
 import pusherJs, { Channel } from 'pusher-js';
 
 @Injectable({

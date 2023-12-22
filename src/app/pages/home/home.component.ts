@@ -45,6 +45,7 @@ export type Company = {
       <h1>Hello {{ title }}</h1>
 
       <a routerLink="/about">About Us</a>
+      <a routerLink="/todos">Todos</a>
       <a routerLink="/contact">Contact</a>
 
       <h1>{{ counter() }}</h1>
