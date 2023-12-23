@@ -13,14 +13,12 @@ import {
   imports: [ReactiveFormsModule],
   providers: [TodoStore],
   template: `
-    <div
-      class="h-[100dvh] flex items-center justify-center  bg-gradient-to-br from-pink-600 to-fuchsia-600"
-    >
+    <div class="flex items-center justify-center">
       <div
         class="flex flex-col items-stretch justify-start gap-5 rounded-xl shadow-lg p-10 bg-white m-5"
       >
         <h1 class="text-center text-2xl">Todos</h1>
-        <div class="flex items-center justify-center text-xl gap-5 ">
+        <div class="flex items-center justify-center text-sm font-semibold gap-5 ">
           <h1>Total: {{ store.totalCount() }}</h1>
           <h1>Completed: {{ store.completedCount() }}</h1>
           <h1>Pending: {{ store.pendingCount() }}</h1>
@@ -57,7 +55,7 @@ import {
                 (click)="store.toggleTodo(todo.id)"
                 class="checked:bg-pink-600 bg-fuchsia-600"
               />
-              <h2>{{ todo.title }}</h2>
+              <h2 (click)="store.toggleTodo(todo.id)">{{ todo.title }}</h2>
             </div>
             <button type="button" (click)="store.deleteTodo(todo.id)">
               ❌

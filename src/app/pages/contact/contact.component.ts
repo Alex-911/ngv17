@@ -1,7 +1,6 @@
 import { GridService } from '@/app/shared/ui/data-grid/grid.service';
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import {
   PaginationState,
   Table,
@@ -16,123 +15,116 @@ import { Todo, TodoService } from './todo.service';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   template: `
-    <div class="h-[100dvh] flex flex-col items-stretch justify-start">
-      <div class="flex items-center justify-start gap-2 p-2 text-2xl">
-        <a routerLink="/">Home</a>
-        <a routerLink="/about">About Us</a>
-        <a routerLink="/contact">Contact</a>
-      </div>
-
-      <div class="flex items-start justify-start gap-2 flex-grow">
-        @if (users()) {
-        <div class="flex items-stretch justify-start flex-col gap-5 w-64 p-2">
-          @for (user of users(); track $index) {
-          <div
-            class="p-2 rounded-xl hover:shadow-lg transition-all duration-300 hover:bg-blue-500 hover:text-white cursor-pointer"
-            [ngClass]="{
-              'bg-blue-500 text-white': user.id === selectedUser()?.id
-            }"
-            (click)="selectuser(user)"
-          >
-            <h3>{{ user.name }}</h3>
-          </div>
-          }
+    <div class="flex items-start justify-start gap-2 flex-grow">
+      @if (users()) {
+      <div class="flex items-stretch justify-start flex-col gap-5 w-64 p-2">
+        @for (user of users(); track $index) {
+        <div
+          class="p-2 rounded-xl hover:shadow-lg transition-all duration-300 hover:bg-blue-500 hover:text-white cursor-pointer"
+          [ngClass]="{
+            'bg-blue-500 text-white': user.id === selectedUser()?.id
+          }"
+          (click)="selectuser(user)"
+        >
+          <h3>{{ user.name }}</h3>
         </div>
-        } @else {
-        <p>No Data</p>
         }
-        <div class="w-0.5 h-full border-l-2 border-blue-500 borr"></div>
+      </div>
+      } @else {
+      <p>No Data</p>
+      }
+      <div class="w-0.5 h-full border-l-2 border-blue-500 borr"></div>
 
-        @defer {
-        <div class="prose mx-auto min-w-fit">
-          @if (selectedUser() !== undefined) { @if (table()) {
-          <div>
-            <table class="">
-              <caption>
-                {{
-                  tableCaption()
-                }}
-              </caption>
-              <thead>
-                @for (headerGroup of table().getHeaderGroups(); track $index) {
-                <tr>
-                  @for (head of headerGroup.headers; track $index) {
-                  <th class="min-w-max">{{ head.column.columnDef.header }}</th>
-                  }
-                </tr>
+      @defer {
+      <div class="prose mx-auto min-w-fit">
+        @if (selectedUser() !== undefined) { @if (table()) {
+        <div>
+          <table class="">
+            <caption>
+              {{
+                tableCaption()
+              }}
+            </caption>
+            <thead>
+              @for (headerGroup of table().getHeaderGroups(); track $index) {
+              <tr>
+                @for (head of headerGroup.headers; track $index) {
+                <th class="min-w-max">{{ head.column.columnDef.header }}</th>
                 }
-              </thead>
-              @if (loading()) {
-              <tbody>
-                <tr>
-                  <td>Loading....</td>
-                  <td></td>
-                </tr>
-              </tbody>
-              } @else {
-              <tbody>
-                @for (row of table().getRowModel().rows; track $index) {
-                <tr>
-                  @for (cell of row.getVisibleCells(); track $index) {
-                  <td>{{ cell.getValue() }}</td>
-                  }
-                </tr>
-                }
-              </tbody>
+              </tr>
               }
-            </table>
-            <div class="flex items-center justify-end gap-5">
-              <button
-                type="button"
-                (click)="goToFirstPage()"
-                [disabled]="!canPreviousPage()"
-              >
-                {{ 'First' }}
-              </button>
-              <button
-                type="button"
-                (click)="goPrevPage()"
-                [disabled]="!canPreviousPage()"
-              >
-                {{ 'Prev' }}
-              </button>
-              <p>
-                {{ pageStatus().currentPage + 1 }} of {{ pageStatus().totalPage }}
-              </p>
-              <button
-                type="button"
-                (click)="goNextPage()"
-                [disabled]="!canNextPage()"
-              >
-                {{ 'Next' }}
-              </button>
-              <button
-                type="button"
-                (click)="goToLastPage()"
-                [disabled]="!canNextPage()"
-              >
-                {{ 'Last' }}
-              </button>
-
-              <select class="cursor-pointer" (change)="setPageSize($event)">
-                @for (size of ["2","5","10","20"]; track $index) {
-                <option [value]="size">
-                  {{ size }}
-                </option>
+            </thead>
+            @if (loading()) {
+            <tbody>
+              <tr>
+                <td>Loading....</td>
+                <td></td>
+              </tr>
+            </tbody>
+            } @else {
+            <tbody>
+              @for (row of table().getRowModel().rows; track $index) {
+              <tr>
+                @for (cell of row.getVisibleCells(); track $index) {
+                <td>{{ cell.getValue() }}</td>
                 }
-              </select>
-            </div>
+              </tr>
+              }
+            </tbody>
+            }
+          </table>
+          <div class="flex items-center justify-end gap-5">
+            <button
+              type="button"
+              (click)="goToFirstPage()"
+              [disabled]="!canPreviousPage()"
+            >
+              {{ 'First' }}
+            </button>
+            <button
+              type="button"
+              (click)="goPrevPage()"
+              [disabled]="!canPreviousPage()"
+            >
+              {{ 'Prev' }}
+            </button>
+            <p>
+              {{ pageStatus().currentPage + 1 }} of
+              {{ pageStatus().totalPage }}
+            </p>
+            <button
+              type="button"
+              (click)="goNextPage()"
+              [disabled]="!canNextPage()"
+            >
+              {{ 'Next' }}
+            </button>
+            <button
+              type="button"
+              (click)="goToLastPage()"
+              [disabled]="!canNextPage()"
+            >
+              {{ 'Last' }}
+            </button>
+
+            <select class="cursor-pointer" (change)="setPageSize($event)">
+              @for (size of ["2","5","10","20"]; track $index) {
+              <option [value]="size">
+                {{ size }}
+              </option>
+              }
+            </select>
           </div>
-          } } @else {
-          <p>Please Select a user.</p>
-          }
         </div>
-        } @loading(after 100ms; minimum 1s) {
-        <p>Loading</p>
+        } } @else {
+        <p>Please Select a user.</p>
         }
       </div>
+      } @loading(after 100ms; minimum 1s) {
+      <p>Loading</p>
+      }
     </div>
   `,
   styles: ``,

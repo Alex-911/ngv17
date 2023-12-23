@@ -39,19 +39,10 @@ export type Company = {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, HttpClientModule],
+  imports: [CommonModule, HttpClientModule],
   template: `
-    <div class="min-h-[100dvh] prose mx-auto container min-w-fit">
-      <h1>Hello {{ title }}</h1>
-
-      <a routerLink="/about">About Us</a>
-      <a routerLink="/todos">Todos</a>
-      <a routerLink="/contact">Contact</a>
-
-      <h1>{{ counter() }}</h1>
-
-      <button (click)="increment()">Add</button>
-      <button (click)="decrement()">Sub</button>
+    <div class="prose mx-auto container min-w-fit h-full overflow-y-auto">
+      <h1>{{ title }}</h1>
 
       @if (loading()) {
       <p>Loading</p>
@@ -63,13 +54,15 @@ export type Company = {
       <!-- Blog -->
       @if (blog() !== null) {
       <div [innerHTML]="blog()"></div>
+      } @else {
+      <p>Loading..</p>
       }
     </div>
   `,
   styles: ``,
 })
 export class HomeComponent {
-  title = 'from New Angular';
+  title = 'New Angular v17';
   loading = signal<boolean>(false);
   data = signal<Res | null>(null);
   http = inject(HttpClient);
