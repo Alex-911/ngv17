@@ -33,11 +33,11 @@ import {
             type="text"
             formControlName="title"
             placeholder="Enter you todo"
-            class="border-2 rounded-md border-fuchsia-500 text-xl rounded-r-none placeholder:text-xl placeholder:p-2 p-2"
+            class="border-2 rounded-md border-fuchsia-500 text-xl ring-0 outline-none rounded-r-none placeholder:text-xl placeholder:p-2 p-2"
           />
           <button
             type="submit"
-            class="rounded-md rounded-l-none p-2 bg-pink-600 text-xl"
+            class="rounded-md rounded-l-none p-2 bg-pink-600 text-xl border-2 border-pink-600"
           >
             Add
           </button>
